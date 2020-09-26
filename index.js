@@ -71,7 +71,7 @@ const commands = {
                 color,
                 fields,
                 footer: {
-                    text: `${baseEmbed.footer.text} | ${data.software} ${data.version}`
+                    text: baseEmbed.footer.text + (data.online ? ` | ${data.software} ${data.version}` : "")
                 }
             };
             sentmsg.then(msg => msg.edit({ content: "", embed }))
@@ -105,26 +105,13 @@ const commands = {
                 ...baseEmbed,
                 fields: playerFields,
                 footer: {
-                    text: baseEmbed.footer.text + " | " + data.version
+                    text: baseEmbed.footer.text + (data.online ? ` | ${data.software} ${data.version}` : "")
                 }
             };
             sentmsg.then(msg => msg.edit({ content: "", embed }))
         });
     },
     help: message => {
-        const helpMessage = [
-            "Commands available:",
-            "1. mc, stat, stats, status - Show server status",
-            "2. list - List players in the server",
-            "3. ip - Show server IP",
-            "4. help - This command",
-            "",
-            `See live server status in <#${settings.discord.channel}>`,
-            baseEmbed.description, //efficiency =)
-            `For serious help please either ping staff, use <#${settings.discord.supportChannel}>, or contact us via email: ${settings.email}`
-        ].join("\n"); // This is an array, but in the end we join it back together, so it looks neat like this
-
-
         const embed = {
             author: baseEmbed.author,
             title: "Commands list",
@@ -171,11 +158,9 @@ bot.on("message", message => {
     if (aliases[cmd]) {
         commands[aliases[cmd]](message) // This looks a bit ugly
     } else if (commands[cmd]) {
-        commands[cmd](message) // php can die in a fire
+        commands[cmd](message)
     }
 })
-
-// lets test it for now
 
 bot.on("ready", () => {
     bot.user.setActivity(settings.discord.prefix + "mc");
@@ -185,7 +170,6 @@ bot.on("ready", () => {
     let previousStatus = "";
 
     setInterval(() => {
-        // async will be a bit complicated, you can search up some resources if you want to know more
         request(settings.apiURL, async(err, response, body) => {
             if (err) {
                 console.log(err);
@@ -215,7 +199,7 @@ bot.on("ready", () => {
 
             let players = "";
             if (data.players && data.players.list) {
-                players = data.players.list.join(", "); // You can do this
+                players = data.players.list.join(", ");
                 fields.push({
                     name: "Players Online",
                     value: "```CSS\n " + data.players.online + " / " + data.players.max + "```",
@@ -247,7 +231,7 @@ bot.on("ready", () => {
                 }
             };
 
-            if (previousPlayers != players || previousStatus != status) { // oooo didnt notice this part
+            if (previousPlayers != players || previousStatus != status) {
                 const channel = await bot.channels.fetch(settings.discord.channel)
                 const message = await channel.messages.fetch(settings.discord.message)
 
