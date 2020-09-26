@@ -6,7 +6,7 @@ Minecraft server status bot for discord using mcsrvstat api. If you wonder why i
 ## Installation
 - Install [Node](https://nodejs.org/en/download/)
 - Change settings.example.js to settings.js configure before you use it. 
-- Install Node modules using CMD
+- Install Node modules using CMD such as discord.js
 - Point directory to where index.js is
 
 Any question join our minecraft [discord](https://discord.gg/cxmJWhX). Don't have any questions? Don't worry come play minecraft with me and join anyway.
