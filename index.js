@@ -233,7 +233,10 @@ bot.on("ready", () => {
                 const channel = await bot.channels.fetch(settings.discord.channel);
                 const message = await channel.messages.fetch(settings.discord.message);
 
-                message.edit({ embed });
+                message.edit({
+                    content: "Live Server Status, Last Updated - " + moment(message.createdAt).format('dddd, MMMM Do YYYY, h:mm:ss a, [GMT]ZZ'),
+                    embed
+                });
             }
 
             previousPlayers = players;
