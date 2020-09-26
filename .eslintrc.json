@@ -47,6 +47,7 @@
         "no-var": "error",
         "prefer-arrow/prefer-arrow-functions": "error",
         "prefer-const": "error",
-        "prefer-object-spread": "error"
+        "prefer-object-spread": "error",
+        "quotes": "error"
     }
 }

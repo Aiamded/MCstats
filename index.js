@@ -35,7 +35,7 @@ const commands = {
         request(settings.apiURL, (err, response, body) => {
             if (err) {
                 console.log(err);
-                return message.reply('Error getting Minecraft server status...');
+                return message.reply("Error getting Minecraft server status...");
             }
 
             const data = JSON.parse(body);
@@ -87,7 +87,7 @@ const commands = {
         request(settings.apiURL, (err, response, body) => {
             if (err) {
                 console.log(err);
-                return message.reply('Error getting Minecraft server status...');
+                return message.reply("Error getting Minecraft server status...");
             }
             const data = JSON.parse(body);
             let playerFields = [{
@@ -234,7 +234,7 @@ bot.on("ready", () => {
                 const message = await channel.messages.fetch(settings.discord.message);
 
                 message.edit({
-                    content: "Live Server Status, Last Updated - " + moment(message.createdAt).format('dddd, MMMM Do YYYY, h:mm:ss a, [GMT]ZZ'),
+                    content: "Live Server Status, Last Updated - " + moment(message.createdAt).format("dddd, MMMM Do YYYY, h:mm:ss a, [GMT]ZZ"),
                     embed
                 });
             }
