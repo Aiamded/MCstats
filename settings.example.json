@@ -1,0 +1,25 @@
+{
+    "email": "",
+    "apiURL": "",
+    "discord": {
+        "channel": "",
+        "supportChannel": "",
+        "embed": {
+            "title": "",
+            "liveHeader": ""
+        },
+        "message": "",
+        "prefix": "",
+        "token": ""
+    },
+    "refresh": 5e3,
+    "server": {
+        "ip": "",
+        "hostname": "",
+        "port": 25565,
+        "name": "",
+        "url": "",
+        "logo": "",
+        "motd": ""
+    }
+}
