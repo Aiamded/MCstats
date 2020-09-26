@@ -1,7 +1,12 @@
 # MCstats
-Minecraft server status bot for discord.
-I like bread.
+Minecraft server status bot for discord using mcsrvstat api. If you wonder why it doesn't update as fast as your server because of cache.
 
-Change settings.example.json to settings.json before you use. Any question join our minecraft [discord](https://discord.gg/cxmJWhX)
+---
 
-:> join if you don't have any questions, its okay come play minecraft with me xd.
+## Installation
+- Install [Node](https://nodejs.org/en/download/)
+- Change settings.example.js to settings.js configure before you use it. 
+- Install Node modules using CMD
+- Point directory to where index.js is
+
+Any question join our minecraft [discord](https://discord.gg/cxmJWhX). Don't have any questions? Don't worry come play minecraft with me and join anyway.
