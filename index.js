@@ -32,24 +32,24 @@ const aliases = {
 const commands = {
     mc: message => {
         const sentmsg = message.reply("Please wait...");
-        request(settings.apiURL, function(err, response, body) {
+        request(settings.apiURL, (err, response, body) => {
             if (err) {
                 console.log(err);
                 return message.reply('Error getting Minecraft server status...');
             }
 
             const data = JSON.parse(body);
-            let status = "```CSS\nOffline```"
+            let status = "```CSS\nOffline```";
             let color = 0xFF0000;
-            let players = 0
+            let players = 0;
             if (data.online) {
                 status = "```CSS\nOnline```";
                 color = 0x00FF00;
-                if (data.players.online) {
+                if (data.players.online)
                     players = data.players.online;
-                }
             }
-            const fields = [{
+            const fields = [
+                {
                     name: "Status",
                     value: status,
                     inline: true
@@ -59,7 +59,7 @@ const commands = {
                     value: "```CSS\n" + settings.server.hostname + "```",
                     inline: true
                 }
-            ]
+            ];
             if (players > 0)
                 fields.push({
                     name: "Players Online",
@@ -74,7 +74,7 @@ const commands = {
                     text: baseEmbed.footer.text + (data.online ? ` | ${data.software} ${data.version}` : "")
                 }
             };
-            sentmsg.then(msg => msg.edit({ content: "", embed }))
+            sentmsg.then(msg => msg.edit({ content: "", embed }));
         });
     },
     ip: message => {
@@ -84,7 +84,7 @@ const commands = {
     },
     list: message => {
         const sentmsg = message.reply("Please wait...");
-        request(settings.apiURL, function(err, response, body) {
+        request(settings.apiURL, (err, response, body) => {
             if (err) {
                 console.log(err);
                 return message.reply('Error getting Minecraft server status...');
@@ -99,7 +99,7 @@ const commands = {
                     name: username,
                     value: "Online",
                     inline: true
-                }))
+                }));
 
             const embed = {
                 ...baseEmbed,
@@ -108,7 +108,7 @@ const commands = {
                     text: baseEmbed.footer.text + (data.online ? ` | ${data.software} ${data.version}` : "")
                 }
             };
-            sentmsg.then(msg => msg.edit({ content: "", embed }))
+            sentmsg.then(msg => msg.edit({ content: "", embed }));
         });
     },
     help: message => {
@@ -116,7 +116,8 @@ const commands = {
             author: baseEmbed.author,
             title: "Commands list",
             color: baseEmbed.color,
-            fields: [{
+            fields: [
+                {
                     name: "mc | stat | stats | status",
                     value: "Show server status"
                 },
@@ -141,7 +142,7 @@ const commands = {
                     ].join("\n")
                 }
             ]
-        }
+        };
         message.channel.send({ embed });
     }
 };
@@ -152,15 +153,14 @@ bot.on("message", message => {
         return;
     if (!message.content.startsWith(settings.discord.prefix)) // Checks if the message starts with the prefix
         return;
-    const cmd = message.content.substr(settings.discord.prefix.length)
+    const cmd = message.content.substr(settings.discord.prefix.length);
 
     // Here, we access the alias object and find the command
-    if (aliases[cmd]) {
-        commands[aliases[cmd]](message) // This looks a bit ugly
-    } else if (commands[cmd]) {
-        commands[cmd](message)
-    }
-})
+    if (aliases[cmd])
+        commands[aliases[cmd]](message); // This looks a bit ugly
+    else if (commands[cmd])
+        commands[cmd](message);
+});
 
 bot.on("ready", () => {
     bot.user.setActivity(settings.discord.prefix + "mc");
@@ -171,13 +171,11 @@ bot.on("ready", () => {
 
     setInterval(() => {
         request(settings.apiURL, async(err, response, body) => {
-            if (err) {
-                console.log(err);
-                return message.reply('Error getting Minecraft server status...');
-            }
+            if (err)
+                return console.log(err);
 
             const data = JSON.parse(body);
-            let status = "```CSS\nOffline```"
+            let status = "```CSS\nOffline```";
             let color = 0xFF0000;
             if (data.online) {
                 status = "```CSS\nOnline```";
@@ -185,10 +183,11 @@ bot.on("ready", () => {
             }
 
             // Here we need a bit more flexibility for the fields
-            const fields = [{
+            const fields = [
+                {
                     name: "Status",
                     value: status,
-                    inline: true,
+                    inline: true
                 },
                 {
                     name: "IP Address",
@@ -210,13 +209,12 @@ bot.on("ready", () => {
                     value: "```" + players + "```",
                     inline: false
                 });
-            } else {
+            } else
                 fields.push({
                     name: "Players Online",
                     value: "```No players online```",
                     inline: true
                 });
-            }
 
             const embed = {
                 ...baseEmbed,
@@ -224,18 +222,18 @@ bot.on("ready", () => {
                     ...baseEmbed.author,
                     name: settings.discord.embed.liveHeader
                 },
-                color: 4571171,
+                color,
                 fields,
                 footer: {
                     text: `${baseEmbed.footer.text} | ${data.software} ${data.version}`
                 }
             };
 
-            if (previousPlayers != players || previousStatus != status) {
-                const channel = await bot.channels.fetch(settings.discord.channel)
-                const message = await channel.messages.fetch(settings.discord.message)
+            if (previousPlayers !== players || previousStatus !== status) {
+                const channel = await bot.channels.fetch(settings.discord.channel);
+                const message = await channel.messages.fetch(settings.discord.message);
 
-                message.edit({ embed })
+                message.edit({ embed });
             }
 
             previousPlayers = players;

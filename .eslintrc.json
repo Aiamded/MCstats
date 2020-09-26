@@ -1,0 +1,52 @@
+{
+    "extends": "eslint:recommended",
+    "env": {
+        "browser": true,
+        "es6": true,
+        "node": true
+    },
+    "parserOptions": {
+        "ecmaVersion": 2018
+    },
+    "plugins": [
+        "eslint-plugin-prefer-arrow"
+    ],
+    "rules": {
+        "no-param-reassign": "error",
+        "semi": ["error", "always"],
+        "arrow-body-style": "error",
+        "comma-dangle": "error",
+        "complexity": "error",
+        "constructor-super": "error",
+        "curly": [
+            "error",
+            "multi"
+        ],
+        "eqeqeq": [
+            "error",
+            "always"
+        ],
+        "indent": ["error", 4],
+        "new-parens": "error",
+        "no-bitwise": "error",
+        "no-caller": "error",
+        "no-cond-assign": "error",
+        "no-duplicate-case": "error",
+        "no-duplicate-imports": "error",
+        "no-invalid-this": "error",
+        "no-new-func": "error",
+        "no-new-wrappers": "error",
+        "no-sequences": "error",
+        "no-shadow": [
+            "error",
+            {
+                "hoist": "all"
+            }
+        ],
+        "no-trailing-spaces": "error",
+        "no-var": "error",
+        "prefer-arrow/prefer-arrow-functions": "error",
+        "prefer-const": "error",
+        "prefer-object-spread": "error"
+    }
+}
