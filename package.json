@@ -6,6 +6,7 @@
     "private": true,
     "dependencies": {
         "discord.js": "^12.3.1",
+        "minecraft-protocol": "^1.16.0",
         "moment": "^2.29.0",
         "request": "^2.88.2"
     },
