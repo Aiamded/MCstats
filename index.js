@@ -1,6 +1,6 @@
 const Discord = require("discord.js");
 const moment = require("moment");
-const request = require("request");
+const checkMcStatus = require("./checkMcStatus");
 
 const settings = require("./settings.json");
 
@@ -32,13 +32,8 @@ const aliases = {
 const commands = {
     mc: message => {
         const sentmsg = message.reply("Please wait...");
-        request(settings.apiURL, (err, response, body) => {
-            if (err) {
-                console.log(err);
-                return message.reply("Error getting Minecraft server status...");
-            }
+        checkMcStatus({ host: settings.apiURL }, (data) => {
 
-            const data = JSON.parse(body);
             let status = "```CSS\nOffline```";
             let color = 0xFF0000;
             let players = 0;
@@ -84,12 +79,7 @@ const commands = {
     },
     list: message => {
         const sentmsg = message.reply("Please wait...");
-        request(settings.apiURL, (err, response, body) => {
-            if (err) {
-                console.log(err);
-                return message.reply("Error getting Minecraft server status...");
-            }
-            const data = JSON.parse(body);
+        checkMcStatus({ host: settings.apiURL }, (data) => {
             let playerFields = [{
                 name: "No players online",
                 value: "‎"
@@ -170,11 +160,9 @@ bot.on("ready", () => {
     let previousStatus = "";
 
     setInterval(() => {
-        request(settings.apiURL, async(err, response, body) => {
-            if (err)
-                return console.log(err);
+        // async will be a bit complicated, you can search up some resources if you want to know more
+        checkMcStatus({ host: settings.apiURL }, async (data) => {
 
-            const data = JSON.parse(body);
             let status = "```CSS\nOffline```";
             let color = 0xFF0000;
             if (data.online) {
