@@ -32,7 +32,7 @@ const aliases = {
 const commands = {
     mc: message => {
         const sentmsg = message.reply("Please wait...");
-        checkMcStatus({ host: settings.apiURL }, (data) => {
+        checkMcStatus({ host: settings.server.ip }, (data) => {
 
             let status = "```CSS\nOffline```";
             let color = 0xFF0000;
@@ -79,7 +79,7 @@ const commands = {
     },
     list: message => {
         const sentmsg = message.reply("Please wait...");
-        checkMcStatus({ host: settings.apiURL }, (data) => {
+        checkMcStatus({ host: settings.server.ip }, (data) => {
             let playerFields = [{
                 name: "No players online",
                 value: "‎"
@@ -161,7 +161,7 @@ bot.on("ready", () => {
 
     setInterval(() => {
         // async will be a bit complicated, you can search up some resources if you want to know more
-        checkMcStatus({ host: settings.apiURL }, async (data) => {
+        checkMcStatus({ host: settings.server.ip }, async (data) => {
 
             let status = "```CSS\nOffline```";
             let color = 0xFF0000;

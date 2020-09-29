@@ -33,6 +33,7 @@ const checkMcStatus = (serverOption, callback) => {
                 players: players,
                 version: result.version.name,
                 protocol: result.version.protocol,
+                software: "",
                 icon: result.favicon
             });
         }
