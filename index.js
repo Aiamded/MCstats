@@ -152,6 +152,14 @@ bot.on("message", message => {
         commands[cmd](message);
 });
 
+bot.on("guildMemberUpdate", (_old, current) => {
+    if (
+        current.roles.cache.has(settings.discord.roles.registered) &&
+        current.roles.cache.has(settings.discord.roles.unregistered)
+    )
+        current.roles.remove(settings.discord.roles.unregistered, "User has registered");
+});
+
 bot.on("ready", () => {
     bot.user.setActivity(settings.discord.prefix + "mc");
     console.log("Ready!");

@@ -9,7 +9,11 @@
         },
         "message": "",
         "prefix": "",
-        "token": ""
+        "token": "",
+        "roles": {
+            "unregistered": "",
+            "registered": ""
+        }
     },
     "refresh": 5e3,
     "server": {
