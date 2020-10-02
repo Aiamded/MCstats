@@ -44,6 +44,7 @@
             }
         ],
         "no-trailing-spaces": "error",
+        "no-unused-vars": "warn",
         "no-var": "error",
         "prefer-arrow/prefer-arrow-functions": "error",
         "prefer-const": "error",
