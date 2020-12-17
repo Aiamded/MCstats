@@ -4,7 +4,7 @@ const checkMcStatus = require("./checkMcStatus");
 
 const settings = require("./settings.json");
 
-const bot = new Discord.Client();
+const bot = new Discord.Client({ ws: { intents: "GUILD_MEMBERS" } });
 bot.login(settings.discord.token);
 
 const baseEmbed = {
